@@ -50,8 +50,9 @@ HomeAssistantCover.prototype = {
     }
 
     var that = this;
-    var service_data = {}
-    service_data.entity_id = this.entity_id
+    var service_data = {
+      entity_id: this.entity_id
+    }
 
     if (coverOn) {
       this.log("Setting cover state on the "+this.name+" to closed");
@@ -88,16 +89,16 @@ HomeAssistantCover.prototype = {
   },
   setPosition: function(position, callback, context) {
     var that = this;
-    var data = {
+    var payload = {
       entity_id: this.entity_id,
       position: position
     };
 
-    this.log("Setting the state of the "+this.name+" to "+ data.position);
+    this.log("Setting the state of the "+this.name+" to "+ payload.position);
 
-    this.client.callService(this.domain, "set_cover_position", data, function(data){
+    this.client.callService(this.domain, "set_cover_position", payload, function(data){
       if (data) {
-        that.log("Successfully set position of "+that.name+" to "+ data.position);
+        that.log("Successfully set position of "+that.name+" to "+ payload.position);
         callback()
       }else{
         callback(communicationError)
