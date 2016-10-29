@@ -97,7 +97,7 @@ class HomeAssistantSensor {
     informationService
       .setCharacteristic(Characteristic.Manufacturer, "Home Assistant")
       .setCharacteristic(Characteristic.Model, "Sensor")
-      .setCharacteristic(Characteristic.SerialNumber, "xxx");
+      .setCharacteristic(Characteristic.SerialNumber, this.entity_id);
 
     this.sensorService
       .getCharacteristic(this.characteristic)

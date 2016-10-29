@@ -97,7 +97,7 @@ class HomeAssistantBinarySensor {
     informationService
       .setCharacteristic(Characteristic.Manufacturer, "Home Assistant")
       .setCharacteristic(Characteristic.Model, "Binary Sensor")
-      .setCharacteristic(Characteristic.SerialNumber, "xxx");
+      .setCharacteristic(Characteristic.SerialNumber, this.entity_id);
 
     return [informationService, this.sensorService];
   }

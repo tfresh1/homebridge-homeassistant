@@ -84,12 +84,12 @@ HomeAssistantLock.prototype = {
     informationService
       .setCharacteristic(Characteristic.Manufacturer, "Home Assistant")
       .setCharacteristic(Characteristic.Model, "Lock")
-      .setCharacteristic(Characteristic.SerialNumber, "xxx");
+      .setCharacteristic(Characteristic.SerialNumber, this.entity_id);
 
       this.lockService
         .getCharacteristic(Characteristic.LockCurrentState)
         .on('get', this.getLockState.bind(this));
-        
+
       this.lockService
         .getCharacteristic(Characteristic.LockTargetState)
         .on('get', this.getLockState.bind(this))

@@ -84,12 +84,12 @@ HomeAssistantGarageDoor.prototype = {
     informationService
       .setCharacteristic(Characteristic.Manufacturer, "Home Assistant")
       .setCharacteristic(Characteristic.Model, "Garage Door")
-      .setCharacteristic(Characteristic.SerialNumber, "xxx");
+      .setCharacteristic(Characteristic.SerialNumber, this.entity_id);
 
       this.garageService
         .getCharacteristic(Characteristic.CurrentDoorState)
         .on('get', this.getGarageDoorState.bind(this));
-        
+
       this.garageService
         .getCharacteristic(Characteristic.TargetDoorState)
         .on('get', this.getGarageDoorState.bind(this))

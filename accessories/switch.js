@@ -93,7 +93,7 @@ HomeAssistantSwitch.prototype = {
     informationService
       .setCharacteristic(Characteristic.Manufacturer, "Home Assistant")
       .setCharacteristic(Characteristic.Model, model)
-      .setCharacteristic(Characteristic.SerialNumber, "xxx");
+      .setCharacteristic(Characteristic.SerialNumber, this.entity_id);
 
     if (this.domain == 'switch') {
       this.switchService

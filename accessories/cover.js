@@ -126,7 +126,7 @@ HomeAssistantCover.prototype = {
     var informationService = new Service.AccessoryInformation();
     informationService
         .setCharacteristic(Characteristic.Manufacturer, "Home Assistant")
-        .setCharacteristic(Characteristic.SerialNumber, "xxx")
+        .setCharacteristic(Characteristic.SerialNumber, this.entity_id)
         .setCharacteristic(Characteristic.Model, this.model);
 
     this.coverService

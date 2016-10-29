@@ -113,7 +113,7 @@ HomeAssistantMediaPlayer.prototype = {
     informationService
       .setCharacteristic(Characteristic.Manufacturer, "Home Assistant")
       .setCharacteristic(Characteristic.Model, "Media Player")
-      .setCharacteristic(Characteristic.SerialNumber, "xxx");
+      .setCharacteristic(Characteristic.SerialNumber, this.entity_id);
 
     this.switchService
       .getCharacteristic(Characteristic.On)

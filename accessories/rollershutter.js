@@ -100,7 +100,7 @@ HomeAssistantRollershutter.prototype = {
     informationService
       .setCharacteristic(Characteristic.Manufacturer, "Home Assistant")
       .setCharacteristic(Characteristic.Model, "Rollershutter")
-      .setCharacteristic(Characteristic.SerialNumber, "xxx");
+      .setCharacteristic(Characteristic.SerialNumber, this.entity_id);
 
     this.rollershutterService
       .getCharacteristic(Characteristic.CurrentDoorState)
