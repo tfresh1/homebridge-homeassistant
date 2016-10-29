@@ -190,7 +190,18 @@ HomeAssistantPlatform.prototype = {
         }else if (entity_type == 'fan'){
           accessory = new HomeAssistantFan(that.log, entity, that)
         }else if (entity_type == 'cover'){
-          accessory = new HomeAssistantCover(that.log, entity, that)
+          if (entity.attributes && entity.attributes.homebridge_cover_type && (
+            entity.attributes.homebridge_cover_type === "rollershutter" ||
+            entity.attributes.homebridge_cover_type === "garage_door"
+          )) {
+            accessory = new HomeAssistantCover(that.log, entity, that, entity.attributes.homebridge_cover_type)
+          } else {
+            that.log.error("'"+entity.entity_id+"' is a cover but does not have a 'homebridge_cover_type' property set. "+
+                          "You must set it to either 'rollershutter' or 'garage_door' in the customize section " +
+                          "of your Home Assistant configuration. It will not be available to Homebridge until you do. " +
+                          "See the README.md for more information. " +
+                          "The attributes that were found are:", JSON.stringify(entity.attributes));
+          }
         }else if (entity_type == 'sensor'){
           accessory = HomeAssistantSensorFactory(that.log, entity, that)
         }else if (entity_type == 'binary_sensor' && entity.attributes && entity.attributes.sensor_class) {

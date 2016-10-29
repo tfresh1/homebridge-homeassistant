@@ -9,7 +9,7 @@ module.exports = function (oService, oCharacteristic, oCommunicationError) {
 };
 module.exports.HomeAssistantCover = HomeAssistantCover;
 
-function HomeAssistantCover(log, data, client, type) {
+function HomeAssistantCover(log, data, client, cover_type) {
   this.client = client
   this.log = log;
   // device info
@@ -22,18 +22,7 @@ function HomeAssistantCover(log, data, client, type) {
   }else{
     this.name = data.entity_id.split(".").pop().replace(/_/g, " ")
   }
-  if (data.attributes && data.attributes.homebridge_cover_type && (
-    data.attributes.homebridge_cover_type === "rollershutter" ||
-    data.attributes.homebridge_cover_type === "garage_door"
-  )) {
-    this.cover_type = data.attributes.homebridge_cover_type;
-  } else {
-    this.log.error("'"+this.entity_id+"' is a cover but does not have a 'homebridge_cover_type' property set. "+
-                  "You must set it to either 'rollershutter' or 'garage_door' in the customize section " +
-                  "of your Home Assistant configuration. It will not be available to Homebridge until you do. " +
-                  "See the README.md for more information. " +
-                  "The attributes that were found are:", JSON.stringify(data.attributes));
-  }
+  this.cover_type = cover_type;
 }
 
 HomeAssistantCover.prototype = {
