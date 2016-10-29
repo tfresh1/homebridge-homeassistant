@@ -10,6 +10,8 @@ module.exports = function (oService, oCharacteristic, oCommunicationError) {
 module.exports.HomeAssistantCover = HomeAssistantCover;
 
 function HomeAssistantCover(log, data, client, type) {
+  this.client = client
+  this.log = log;
   // device info
   this.domain = "cover"
   this.data = data
@@ -26,13 +28,12 @@ function HomeAssistantCover(log, data, client, type) {
   )) {
     this.cover_type = data.attributes.homebridge_cover_type;
   } else {
-    throw new Error("You must provide the `homebridge_cover_type\" property " +
-                    "in the customise section of your Home Assistant config. " +
-                    "Set it to either `rollershutter\" or `garage_door\".");
+    this.log.error("'"+this.entity_id+"' is a cover but does not have a 'homebridge_cover_type' property set. "+
+                  "You must set it to either 'rollershutter' or 'garage_door' in the customize section " +
+                  "of your Home Assistant configuration. It will not be available to Homebridge until you do. " +
+                  "See the README.md for more information. " +
+                  "The attributes that were found are:", JSON.stringify(data.attributes));
   }
-
-  this.client = client
-  this.log = log;
 }
 
 HomeAssistantCover.prototype = {
